@@ -29,12 +29,12 @@ object Api {
     val baseUrl = "http://localhost:8088"
     val restaurantUrl = "$baseUrl/restaurant"
 
-    suspend fun getAllHardware(): List<Restaurant> {
-        val body = httpClient.get("http://localhost:8088/restaurant").body<String>()
-        val x = Json.decodeFromString<PageResponse<Restaurant>>(body)
-//        println(x)
-        return gson.fromJson(body, Array<Restaurant>::class.java).toList()
-    }
+//    suspend fun getAllHardware(): List<Restaurant> {
+//        val body = httpClient.get("http://localhost:8088/restaurant").body<String>()
+//        val x = Json.decodeFromString<PageResponse<Restaurant>>(body)
+////        println(x)
+//        return gson.fromJson(body, Array<Restaurant>::class.java).toList()
+//    }
 
 //    suspend fun postNewHardware(hardware: Hardware): Hardware {
 //        val body = httpClient.post("http://localhost:8081/hardware") {

@@ -12,9 +12,8 @@ import androidx.compose.ui.window.application
 import kotlinx.coroutines.launch
 import model.Restaurant
 import ui.components.navigation.DrawerContent
-import ui.screens.RestaurantInsertScreen
-import ui.screens.RestaurantScreen
 import ui.screens.Screen
+import ui.screens.screens
 import ui.style.DarkColorScheme
 
 
@@ -23,36 +22,18 @@ object AppState {
     var currentScreen: Screen by mutableStateOf(Screen.RESTAURANT)
 }
 
-data class ScreenModel(
-    val route: Screen,
-    val content: @Composable ((Screen) -> Unit) -> Unit
-)
-
-val screens = listOf(
-    ScreenModel(
-        route = Screen.RESTAURANT,
-        content = { navigateTo -> RestaurantScreen(navigateTo) }
-    ),
-    ScreenModel(
-        route = Screen.RESTAURANT_INSERT,
-        content = { navigateTo -> RestaurantInsertScreen(navigateTo) }
-    )
-)
-
-
 @Composable
 @Preview
 fun App() {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    var currentScreen = remember { mutableStateOf(screens.first()) }
+    val currentScreen = remember { mutableStateOf(screens.first()) }
     val scope = rememberCoroutineScope()
 
     val navigateTo: (Screen) -> Unit = { targetScreen ->
         val targetModel = screens.find { it.route == targetScreen }
         targetModel?.let {
             currentScreen.value = it
-            println("123")
         }
     }
 
@@ -72,7 +53,7 @@ fun App() {
                             modifier = Modifier.padding(16.dp),
                             onClick = {
                                 scope.launch {
-                                    drawerState.open() // Open the drawer
+                                    drawerState.open()
                                 }
                             }) {
                             Icon(Icons.Filled.Menu, contentDescription = "Open Drawer")

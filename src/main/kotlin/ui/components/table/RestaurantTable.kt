@@ -77,6 +77,8 @@ fun RestaurantRowComposable(
     onUpdateClick: (Restaurant) -> Unit,
     onDeleteClick: (Restaurant) -> Unit
 ) {
+    val style = MaterialTheme.typography.bodyMedium
+    val color = MaterialTheme.colorScheme.onSurface
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -84,34 +86,34 @@ fun RestaurantRowComposable(
         Text(
             text = restaurant.name,
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface
+            style = style,
+            color = color
         )
         Text(
             text = restaurant.code,
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface
+            style = style,
+            color = color
         )
         Text(
             text = restaurant.category.displayName,
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface
+            style = style,
+            color = color
         )
         Text(
             text = restaurant.address,
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface
+            style = style,
+            color = color
         )
         Text(
             text = "$${restaurant.phone}",
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface
+            style = style,
+            color = color
         )
-        Row(modifier = Modifier.weight(1f).border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface)),
+        Row(modifier = Modifier.weight(1f),
             horizontalArrangement = Arrangement.SpaceEvenly) {
             IconButton(
                 modifier = modifier.weight(1f).size(24.dp),

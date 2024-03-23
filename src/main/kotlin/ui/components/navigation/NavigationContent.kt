@@ -1,6 +1,5 @@
 package ui.components.navigation
 
-import ScreenModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,11 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import ui.screens.ScreenModel
+import ui.screens.ScreenType
 
 @Composable
 fun DrawerContent(
@@ -59,21 +59,23 @@ fun DrawerContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        screens.forEach { screen ->
-            NavigationDrawerItem(
-                label = {
-                    Text(
-                        style = MaterialTheme.typography.bodyLarge,
-                        text = screen.route.displayName
-                    )
-                },
-                selected = currentScreen.value == screen,
-                onClick = {
-                    currentScreen.value = screen
-                    scope.launch { drawerState.close() }
-                }
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-        }
+        screens
+            .filter { it.screenType == ScreenType.MAIN }
+            .forEach { screen ->
+                NavigationDrawerItem(
+                    label = {
+                        Text(
+                            style = MaterialTheme.typography.bodyLarge,
+                            text = screen.route.displayName
+                        )
+                    },
+                    selected = currentScreen.value == screen,
+                    onClick = {
+                        currentScreen.value = screen
+                        scope.launch { drawerState.close() }
+                    }
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+            }
     }
 }

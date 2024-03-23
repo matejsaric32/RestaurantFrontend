@@ -37,13 +37,18 @@ object RestaurantRepositoryImpl : RestaurantRepository {
     }
 
     override suspend fun updateRestaurant(restaurant: Restaurant) {
-        TODO("Not yet implemented")
+        try {
+            val response = Api.httpClient.put(restaurantUrl) {
+                contentType(ContentType.Application.Json)
+                setBody(restaurant)
+            }
+        } catch (e: Exception) {
+            println(e.message)
+        }
     }
 
     override suspend fun deleteRestaurantByCode(restaurant: Restaurant) {
-
         val response = Api.httpClient.delete("${restaurantUrl}/${restaurant.code}")
-
         if (!response.status.isSuccess()) {
             throw ApiExcpetion("Error deleting restaurant: ${response.status}")
         }

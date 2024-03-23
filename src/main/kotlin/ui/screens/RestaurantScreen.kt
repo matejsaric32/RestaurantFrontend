@@ -1,5 +1,6 @@
 package ui.screens
 
+import AppState
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -74,8 +75,9 @@ fun RestaurantScreen(onNavigate: (Screen) -> Unit) {
         }
 
         DisplayRestaurant(restaurants, onUpdate = { restaurantToUpdate ->
-//            AppState.selectedRestaurant = restaurantToUpdate
-//            AppState.currentScreen = Screen.RESTAURANT_UPDATE
+            println("Update")
+            AppState.selectedRestaurant = restaurantToUpdate
+            onNavigate(Screen.RESTAURANT_UPDATE)
         }, onDelete = { restaurantToDelete ->
             scope.launch {
                 try {
